@@ -49,7 +49,7 @@ public class Player {
 	}
 	
 	public static Player getInstance(){
-		if (player != null){
+		if (player == null){
 			player = new Player();
 		}
 		return player;
