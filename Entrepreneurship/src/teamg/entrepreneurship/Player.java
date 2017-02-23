@@ -6,26 +6,14 @@ package teamg.entrepreneurship;
  *
  */
 public class Player {
-	private int position;
 	private int money;
 	private String name;
+	private double gainModifier = 1.0;
+	private double lossModifier = 1.0;
 	private static Player player;
 	private Player(){
-		position = 0;
 		money = 0;
 		name = "Player";
-	}
-	
-	public int getPosition(){
-		return position;
-	}
-	
-	public void setPosition(int position){
-		this.position = position;
-	}
-	
-	public void addPosition(int delta){
-		this.position += delta;
 	}
 	
 	public int getMoney(){
@@ -48,6 +36,29 @@ public class Player {
 		this.name = name;
 	}
 	
+	public double getGainModifier(){
+		return gainModifier;
+	}
+	
+	
+	public void setGainModifier(double gainModifier){
+		this.gainModifier = gainModifier;
+	}
+	
+	public void addGainModifier(double delta){
+		this.gainModifier += delta;
+	}
+	public double getLossModifier(){
+		return lossModifier;
+	}
+	
+	public void setLossModifier(double lossModifier){
+		this.lossModifier = lossModifier;
+	}
+	
+	public void addLossModifier(double lossModifier){
+		this.lossModifier += lossModifier;
+	}
 	public static Player getInstance(){
 		if (player == null){
 			player = new Player();
