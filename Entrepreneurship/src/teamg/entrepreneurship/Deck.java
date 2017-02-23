@@ -10,22 +10,22 @@ import java.util.Random;
  *
  */
 public class Deck{
-	List<ConsequenceCard> cards;
-	Random rand = new Random();
-	Deck deck;
+	private List<ConsequenceCard> cards;
+	private Random rand = new Random();
+	private static Deck deck;
 	private Deck(){
 		cards = new ArrayList<ConsequenceCard>();
 	}
 	
-	public void add(ConsequenceCard card) {
-		cards.add(card);
+	public void addAll(List<ConsequenceCard> cards) {
+		this.cards.addAll(cards);
 	}
 
 	public ConsequenceCard draw() {
 		return cards.remove(rand.nextInt(cards.size()));
 	}
 	
-	public Deck getInstance(){
+	public static Deck getInstance(){
 		if (deck == null){
 			deck = new Deck();
 		}
