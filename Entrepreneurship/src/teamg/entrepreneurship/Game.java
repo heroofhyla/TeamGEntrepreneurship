@@ -11,15 +11,33 @@ public class Game {
 							}),
 							new ConsequenceCard("I know a guy.", "Thanks to your expert advice, you save some money. Lose 10% less money than usual this turn.",()->{
 								Player.getInstance().addLossModifier(-0.1);
+							}),
+							new ConsequenceCard("Scam-Artist.", "Even the best get scammed. Lose $1,000.",()->{
+								Player.getInstance().addMoney(-1000);
+							}),
+							new ConsequenceCard("Partner.", "The best help can also become a great partner in your company, your profit increases. Gain 5%.",()->{
+								Player.getInstance().addGainModifier(.05);
 							})
 					}),()->{
 						//nothing
 					}),
-			new Choice("Customer Surveys", "Customer surveys will help you find the best product for your market.",
+			new Choice("Customer Surveys", "Customer surveys will help you find the best product for your market. Cost to create survey $250",
 					Arrays.asList(new ConsequenceCard[]{
-							
+							new ConsequenceCard("Survey", "Your company has recieved numerous surveys and have implemented the best ideas with positive feedback. Gain $1000.",()->{
+								Player.getInstance().addMoney(1000);
+							}),
+							new ConsequenceCard("Survey", "Your company has recieved numerous surveys and have implemented the best ideas with negative feedback. Lose $1000.",()->{
+								Player.getInstance().addMoney(-1000);
+							}),
+							new ConsequenceCard("Web Surveys", "Your surveys have been taken on multiple websites that has been implemented with positive results. Gain $1000.",()->{
+								Player.getInstance().addMoney(1000);
+							}),
+							new ConsequenceCard("Web Surveys", "While having surveys on multiple website it still requires funds. Lose $500.",()->{
+								Player.getInstance().addMoney(-500);
+							}),
+							randEvents()						
 					}),()->{
-						
+						//Do Nothing					
 					}),
 			new Choice("Gut Instinct", "Following your gut will help you make a prdouct you're passionate about.",
 					Arrays.asList(new ConsequenceCard[]{
@@ -29,7 +47,7 @@ public class Game {
 					})
 	}));
 	static Phase developmentPhase = new ChoicePhase("Business Plan", "In this phase you will choose what your business plan will be.",Arrays.asList(new Choice[]{
-			new Choice("The customer is always right", "In this phase you will decide on what business plan you will you choice and how it will affect your customers experience. You recieve an added bonus of $5,000.", 
+			new Choice("The customer is always right", "In this phase you will decide on what business plan you will you choice and how it will affect your customers experience. You recieve an added bonus of $3,500.", 
 					Arrays.asList(new ConsequenceCard[]{
 							new ConsequenceCard("Customer Satisfaction", "Overal customers are satisfied with your company since you pay attention to concerns and issues. Gain $500.",()->{
 								Player.getInstance().addMoney(500);
@@ -37,14 +55,15 @@ public class Game {
 							new ConsequenceCard("Continues Inprovements", "You continously make improvements but your customers are never happy, Lose $750.",()->{
 								Player.getInstance().addMoney(-750);
 							}),
-							new ConsequenceCard("Survey", "Your company has recieved numerous surveys and have implemented the best ideas with positive feedback. Gain $1000.",()->{
+							new ConsequenceCard("Positive Feedback", "Feedback has been given on the companies satisfaction rating with an overall positive result. Gain $1000.",()->{
 								Player.getInstance().addMoney(1000);
 							}),
-							new ConsequenceCard("Survey", "Your company has recieved numerous surveys and have implemented the best ideas with negative feedback. Lose $1000.",()->{
+							new ConsequenceCard("Negative Feedback", "Feedback has been given on the companies satisfaction rating with an overall negative result. Lose $1000.",()->{
 								Player.getInstance().addMoney(-1000);
-							})
+							}),
+							randEvents()
 					}), ()->{
-						Player.getInstance().setMoney(5000);
+						//Do Nothing
 					}),
 			new Choice("Advertising is key", "The idea of selling and promoting your product isn't new and of course it isn't free, Lose 2% of income to fund Advertising Dept.",	
 					Arrays.asList(new ConsequenceCard[]{
@@ -59,9 +78,10 @@ public class Game {
 							}),
 							new ConsequenceCard("Sales Up", "Your sales are skyrocketing and hitting new records. Gain $2,000 .",()->{
 								Player.getInstance().addMoney(2000);
-							})
+							}),
+							randEvents()
 					}),()->{
-						Player.getInstance().addLossModifier(.02);
+						Player.getInstance().addLossModifier(-.02);
 					}),
 			new Choice("A penny saved is a penny earned", "Money not spent is money that is in one's pocket. Gain $5,000",
 					Arrays.asList(new ConsequenceCard[]{
@@ -72,14 +92,15 @@ public class Game {
 								Player.getInstance().addMoney(-1500);
 							}),
 							new ConsequenceCard("Cheapskate", "Your business has took a toll on employee and customer satisfaction due to your need to hold out on anything requiring money. Lose 15%.",()->{
-								Player.getInstance().addLossModifier(.15);
+								Player.getInstance().addLossModifier(-.15);
 							}),
-							new ConsequenceCard("Market Crash", "The market crashes and all that cash you saved loses value. Lose 25%",()->{
+							new ConsequenceCard("Market Crash", "The market crashes and all that cash you saved loses value. Lose 25% of all ass",()->{
 								double result = Player.getInstance().getMoney()*.75;
 								Player.getInstance().setMoney((int)result);
-							})
+							}),
+							randEvents()
 					}),()->{
-						Player.getInstance().setMoney(5000);
+						Player.getInstance().addMoney(5000);
 					})
 			
 	}));
@@ -97,39 +118,42 @@ public class Game {
 							}),
 							new ConsequenceCard("Silent Ears", "Your idea is not unique enough and has given most investors doubts about giving you financial backings. Get a bank loan of $5,000 with -5%.",()->{
 								Player.getInstance().addMoney(-5000);
-								Player.getInstance().addLossModifier(.05);
-							})
+								Player.getInstance().addLossModifier(-.05);
+							}),
+							randEvents()
 					}), ()->{
-						Player.getInstance().setMoney(10000);
+						Player.getInstance().addMoney(10000);
 					}),
-			new Choice("Take Out a Loan", "The bank offers you a $20000 loan.",	
+			new Choice("Take Out a Loan", "The bank offers you a $20000 loan at 7% APR",	
 					Arrays.asList(new ConsequenceCard[]{
 							new ConsequenceCard("Loan Payment Due", "You pay back $200 on your loan.",()->{
 								Player.getInstance().addMoney(-200);
 							}),
 							new ConsequenceCard("Interest", "Lose an extra 10% whenever you lose money this turn.",()->{
-								Player.getInstance().addLossModifier(0.1);
+								Player.getInstance().addLossModifier(-0.1);
 							}),
 							new ConsequenceCard("Bad Credit", "Lose an extra 25%.",()->{
-								Player.getInstance().addLossModifier(.25);
+								Player.getInstance().addLossModifier(-.25);
 							}),
 							new ConsequenceCard("Excellent Credit", "Secure an interest rate of 4% whenever you lose money this turn.",()->{
 								Player.getInstance().addGainModifier(0.04);
-							})
+							}),
+							randEvents()
 					}),()->{
-						Player.getInstance().setMoney(20000);
+						Player.getInstance().addMoney(20000);
+						Player.getInstance().addLossModifier(-.07);				
 					}),
 			new Choice("Pay out of Pocket", "You fund your venture out of your own pocket. You only have $5000.",
 					Arrays.asList(new ConsequenceCard[]{
-//							new ConsequenceCard("Car Payment", "You wind up having to take $500 from the company to pay a car payment.",()->{
-//								Player.getInstance().addMoney(-500);
-//							}),
-//							new ConsequenceCard("Birthday Cash", "Your mom gives you $50 for your birthday. Nice!",()->{
-//								Player.getInstance().addMoney(50);
-//							}),
+							new ConsequenceCard("Car Payment", "You wind up having to take $500 from the company to pay a car payment.",()->{
+								Player.getInstance().addMoney(-500);
+							}),
+							new ConsequenceCard("Birthday Cash", "Your mom gives you $50 for your birthday. Nice!",()->{
+								Player.getInstance().addMoney(50);
+							}),
 							randEvents()
 					}),()->{
-						Player.getInstance().setMoney(5000);
+						Player.getInstance().addMoney(5000);
 					})
 			
 	}));
@@ -143,14 +167,15 @@ public class Game {
 		
 	}
 
+	//Method that returns a random even consequence card for gameplay
 	static ConsequenceCard randEvents()
 	{
+		//variables
 		ConsequenceCard consequence;
 		Player effect = Player.getInstance();
-		int roll = Die.roll();
 		
-		switch(roll){
-			
+		switch(Die.roll()){
+			//Random Events 1-6
 			case 1 :	consequence = 
 						new ConsequenceCard("Car Payment", "You wind up having to take $500 from the company to pay a car payment.",()->effect.addMoney(500));
 						break;
@@ -161,17 +186,20 @@ public class Game {
 						new ConsequenceCard("Broken Main", "Unfortunate events, pay $1,500 to repairs.",()->effect.addMoney(1500));
 						break;
 			case 4 :	consequence = 
-						new ConsequenceCard("Law Suits", "Dang, you just got a lawsuit. Pay $1,500 to settle.",()->effect.addMoney(-1500));
+						new ConsequenceCard("Law Suits", "Dang, you just got a lawsuit. Pay $2,500 to tle.",()->effect.addMoney(-1500));
+						break;
+			case 5 :	consequence = 
+						new ConsequenceCard("Hire Employee", "Hiring a new employee isn't cheap. Lose $2,500",()->effect.addMoney(-1500));
 						break;
 			default :	consequence = 
-						new ConsequenceCard("Business as Usual", "Usual business of the day recieve a payment of $500.",()->effect.addMoney(500));
+						new ConsequenceCard("Business as Usual", "Usual business of the day recieve a bonus payment of $500.",()->effect.addMoney(500));
 						break; 
 		}
-		
-		return consequence;
-		
+		//return
+		return consequence;	
 	}
 
+	
 	public static void main(String[] args){
 		
 		Phase currentPhase = discoveryPhase;
