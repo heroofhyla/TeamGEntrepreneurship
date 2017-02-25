@@ -1,4 +1,4 @@
-package teamg.entrepren	eurship;
+package teamg.entrepreneurship;
 
 import java.awt.Color;
 import java.util.List;
