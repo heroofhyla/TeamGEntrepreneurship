@@ -10,6 +10,7 @@ public class Player {
 	private String name;
 	private double gainModifier = 1.0;
 	private double lossModifier = 1.0;
+	private Space position = null;
 	private static Player player;
 	private Player(){
 		money = 0;
@@ -25,7 +26,15 @@ public class Player {
 	}
 	
 	public void addMoney(int delta){
-		this.money += delta;
+		if (delta > 0){
+			delta *= gainModifier;
+			this.money += delta;
+			System.out.println("Gained $" + delta + " (current money: $" + money + ")");
+		}else{
+			delta *= lossModifier;
+			this.money += delta;
+			System.out.println("Lost $" + delta + " (current money: $" + money + ")");
+		}
 	}
 	
 	public String getName(){
@@ -59,6 +68,22 @@ public class Player {
 	public void addLossModifier(double lossModifier){
 		this.lossModifier += lossModifier;
 	}
+	
+	public Space getPosition(){
+		return position;
+	}
+	
+	public void setPosition(Space position){
+		this.position = position;
+	}
+	
+	public int branchCount(){
+		return this.position.getNextSpaces().size();
+	}
+	public void step(int branch){
+		position = position.getNextSpaces().get(branch);
+	}
+	
 	public static Player getInstance(){
 		if (player == null){
 			player = new Player();
