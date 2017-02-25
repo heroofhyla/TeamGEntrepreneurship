@@ -1,5 +1,7 @@
 package teamg.entrepreneurship;
 
+import java.util.List;
+import java.util.ArrayList;
 import java.util.Arrays;
 
 public class Game {
@@ -34,8 +36,7 @@ public class Game {
 							}),
 							new ConsequenceCard("Web Surveys", "While having surveys on multiple website it still requires funds. Lose $500.",()->{
 								Player.getInstance().addMoney(-500);
-							}),
-							randEvents()						
+							})					
 					}),()->{
 						//Do Nothing					
 					}),
@@ -60,8 +61,7 @@ public class Game {
 							}),
 							new ConsequenceCard("Negative Feedback", "Feedback has been given on the companies satisfaction rating with an overall negative result. Lose $1000.",()->{
 								Player.getInstance().addMoney(-1000);
-							}),
-							randEvents()
+							})
 					}), ()->{
 						//Do Nothing
 					}),
@@ -78,8 +78,7 @@ public class Game {
 							}),
 							new ConsequenceCard("Sales Up", "Your sales are skyrocketing and hitting new records. Gain $2,000 .",()->{
 								Player.getInstance().addMoney(2000);
-							}),
-							randEvents()
+							})
 					}),()->{
 						Player.getInstance().addLossModifier(-.02);
 					}),
@@ -94,11 +93,10 @@ public class Game {
 							new ConsequenceCard("Cheapskate", "Your business has took a toll on employee and customer satisfaction due to your need to hold out on anything requiring money. Lose 15%.",()->{
 								Player.getInstance().addLossModifier(-.15);
 							}),
-							new ConsequenceCard("Market Crash", "The market crashes and all that cash you saved loses value. Lose 25% of all ass",()->{
+							new ConsequenceCard("Market Crash", "The market crashes and all that cash you saved loses value. Lose 25% of all assets",()->{
 								double result = Player.getInstance().getMoney()*.75;
 								Player.getInstance().setMoney((int)result);
-							}),
-							randEvents()
+							})
 					}),()->{
 						Player.getInstance().addMoney(5000);
 					})
@@ -119,8 +117,7 @@ public class Game {
 							new ConsequenceCard("Silent Ears", "Your idea is not unique enough and has given most investors doubts about giving you financial backings. Get a bank loan of $5,000 with -5%.",()->{
 								Player.getInstance().addMoney(-5000);
 								Player.getInstance().addLossModifier(-.05);
-							}),
-							randEvents()
+							})
 					}), ()->{
 						Player.getInstance().addMoney(10000);
 					}),
@@ -137,8 +134,7 @@ public class Game {
 							}),
 							new ConsequenceCard("Excellent Credit", "Secure an interest rate of 4% whenever you lose money this turn.",()->{
 								Player.getInstance().addGainModifier(0.04);
-							}),
-							randEvents()
+							})
 					}),()->{
 						Player.getInstance().addMoney(20000);
 						Player.getInstance().addLossModifier(-.07);				
@@ -150,53 +146,39 @@ public class Game {
 							}),
 							new ConsequenceCard("Birthday Cash", "Your mom gives you $50 for your birthday. Nice!",()->{
 								Player.getInstance().addMoney(50);
-							}),
-							randEvents()
+							})
 					}),()->{
 						Player.getInstance().addMoney(5000);
 					})
-			
 	}));
-	
-	
+
 	static Phase managementPhase = new ManagementPhase();
 	static{
+				
 		discoveryPhase.setNextPhase(developmentPhase);
 		developmentPhase.setNextPhase(resourcingPhase);		
 		resourcingPhase.setNextPhase(managementPhase);
 		
-	}
-
-	//Method that returns a random even consequence card for gameplay
-	static ConsequenceCard randEvents()
-	{
-		//variables
-		ConsequenceCard consequence;
-		Player effect = Player.getInstance();
+		//call random events
+		randEvents();
 		
-		switch(Die.roll()){
-			//Random Events 1-6
-			case 1 :	consequence = 
-						new ConsequenceCard("Car Payment", "You wind up having to take $500 from the company to pay a car payment.",()->effect.addMoney(500));
-						break;
-			case 2 :	consequence = 
-						new ConsequenceCard("Pay Day", "Its pay day, collect $1500.",()->effect.addMoney(1500));
-						break;
-			case 3 :	consequence = 
-						new ConsequenceCard("Broken Main", "Unfortunate events, pay $1,500 to repairs.",()->effect.addMoney(1500));
-						break;
-			case 4 :	consequence = 
-						new ConsequenceCard("Law Suits", "Dang, you just got a lawsuit. Pay $2,500 to tle.",()->effect.addMoney(-1500));
-						break;
-			case 5 :	consequence = 
-						new ConsequenceCard("Hire Employee", "Hiring a new employee isn't cheap. Lose $2,500",()->effect.addMoney(-1500));
-						break;
-			default :	consequence = 
-						new ConsequenceCard("Business as Usual", "Usual business of the day recieve a bonus payment of $500.",()->effect.addMoney(500));
-						break; 
-		}
-		//return
-		return consequence;	
+	}
+	//Method for creating and adding random events to deck.
+	private static void randEvents(){
+		//variables
+		List<ConsequenceCard> consequence = new ArrayList<ConsequenceCard>();
+		Player effect = Player.getInstance();
+
+		//Create random events
+		consequence.add(new ConsequenceCard("Car Payment", "You wind up having to take $500 from the company to pay a car payment.",()->effect.addMoney(500)));
+		consequence.add(new ConsequenceCard("Pay Day", "Its pay day, collect $1500.",()->effect.addMoney(1500)));
+		consequence.add(new ConsequenceCard("Broken Main", "Unfortunate events, pay $1,500 to repairs.",()->effect.addMoney(1500)));
+		consequence.add(new ConsequenceCard("Law Suits", "Dang, you just got a lawsuit. Pay $2,500 to settle.",()->effect.addMoney(-1500)));
+		consequence.add(new ConsequenceCard("Hire Employee", "Hiring a new employee isn't cheap. Lose $2,500",()->effect.addMoney(-1500)));
+		consequence.add(new ConsequenceCard("Business as Usual", "Usual business of the day recieve a bonus payment of $500.",()->effect.addMoney(500)));
+		
+		//add to deck
+		Deck.getInstance().addAll(consequence);
 	}
 
 	
