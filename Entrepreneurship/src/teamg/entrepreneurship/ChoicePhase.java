@@ -53,5 +53,6 @@ public class ChoicePhase implements Phase{
 		int choice = scanner.nextInt();
 		scanner.nextLine();//clear input buffer
 		choices.get(choice-1).activate();
+		System.out.println();//Provide space
 	}
 }
