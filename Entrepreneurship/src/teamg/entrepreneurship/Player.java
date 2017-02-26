@@ -33,7 +33,13 @@ public class Player {
 		}else{
 			delta *= lossModifier;
 			this.money += delta;
-			System.out.println("Lost $" + -1*delta + " (current money: $" + money + ")");
+			if(this.money <= 0){
+				System.out.println("Lost $" + -1*delta + ". You are out of money, and can no longer contiue.");
+				System.exit(0);
+			}
+			else{
+				System.out.println("Lost $" + -1*delta + " (current money: $" + money + ")");
+			}
 		}
 	}
 	
