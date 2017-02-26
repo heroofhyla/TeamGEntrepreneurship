@@ -33,7 +33,7 @@ public class Player {
 		}else{
 			delta *= lossModifier;
 			this.money += delta;
-			System.out.println("Lost $" + delta + " (current money: $" + money + ")");
+			System.out.println("Lost $" + -1*delta + " (current money: $" + money + ")");
 		}
 	}
 	

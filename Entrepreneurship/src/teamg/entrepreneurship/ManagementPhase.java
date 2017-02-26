@@ -85,6 +85,7 @@ public class ManagementPhase implements Phase{
 
 	@Override
 	public void process() {
+		Player.getInstance().setPosition(firstSpace);
 		boolean done = false;
 		System.out.println("Business Management");
 		System.out.println("In this phase you will actually run your company. \n"

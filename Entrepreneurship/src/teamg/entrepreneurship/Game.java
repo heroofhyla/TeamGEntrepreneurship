@@ -151,14 +151,28 @@ public class Game {
 						Player.getInstance().addMoney(5000);
 					})
 	}));
-
+	
+	static Phase harvestingPhase = new ChoicePhase("Harvesting", "You have been developing your business for a while, and you're itching for a change.",Arrays.asList(new Choice[]{
+			new Choice("Grow your business", "You decide to develop a new product in order to grow your business.", Arrays.asList(new ConsequenceCard[]{
+					}), ()->{
+						//nothing
+					}),
+			new Choice("Cash Out (This will end the game)", "You decide that you want to move on with your life.",	
+					Arrays.asList(new ConsequenceCard[]{
+					}),()->{
+						signalGameEnd();
+					}),
+	}));
+	
+	static Phase beginPhase = new BeginPhase();
 	static Phase managementPhase = new ManagementPhase();
 	static{
-				
+		beginPhase.setNextPhase(discoveryPhase);
 		discoveryPhase.setNextPhase(developmentPhase);
 		developmentPhase.setNextPhase(resourcingPhase);		
 		resourcingPhase.setNextPhase(managementPhase);
-		
+		managementPhase.setNextPhase(harvestingPhase);
+		harvestingPhase.setNextPhase(discoveryPhase);
 		//call random events
 		randEvents();
 		
@@ -180,11 +194,15 @@ public class Game {
 		//add to deck
 		Deck.getInstance().addAll(consequence);
 	}
-
+	
+	public static void signalGameEnd(){
+		System.out.println("You finish your entrepreneurial adventure with $" + Player.getInstance().getMoney());
+		System.exit(0);
+	}
 	
 	public static void main(String[] args){
 		
-		Phase currentPhase = discoveryPhase;
+		Phase currentPhase = beginPhase;
 		
 		boolean gameOver = false;
 		while(!gameOver){
