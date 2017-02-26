@@ -11,11 +11,23 @@ public class Game {
 							new ConsequenceCard("Nothing New", "Your product isn't new or exciting. Gain 10% less money than usual this turn.",()->{
 								Player.getInstance().addGainModifier(-0.1);
 							}),
+							new ConsequenceCard("Do this, not that.","Experience from the expert's past mistakes saves you time and money. Gain $1,000",()->{
+								Player.getInstance().addMoney(1000);
+							}),
 							new ConsequenceCard("I know a guy.", "Thanks to your expert advice, you save some money. Lose 10% less money than usual this turn.",()->{
 								Player.getInstance().addLossModifier(-0.1);
 							}),
+							new ConsequenceCard("Fool me twice.", "Expert advice leads to making the same mistakes they did. Lose $500",()->{
+								Player.getInstance().addMoney(-500);
+							}),
 							new ConsequenceCard("Scam-Artist.", "Even the best get scammed. Lose $1,000.",()->{
 								Player.getInstance().addMoney(-1000);
+							}),
+							new ConsequenceCard("I would've never thought of that.", "Expert produces great ideas. Gain $1,000.",()->{
+								Player.getInstance().addMoney(1000);
+							}),
+							new ConsequenceCard("Communication is key.", "Expert is slow to respond, slowing the whole process. Gain 5% less money this turn.",()->{
+								Player.getInstance().addGainModifier(-0.05);
 							}),
 							new ConsequenceCard("Partner.", "The best help can also become a great partner in your company, your profit increases. Gain 5%.",()->{
 								Player.getInstance().addGainModifier(.05);
@@ -28,11 +40,22 @@ public class Game {
 							new ConsequenceCard("Survey", "Your company has recieved numerous surveys and have implemented the best ideas with positive feedback. Gain $1000.",()->{
 								Player.getInstance().addMoney(1000);
 							}),
+							new ConsequenceCard("Price is right", "Surveys give insightful data on price point. Gain 10% increase profits this turn.",()->{
+								Player.getInstance().addGainModifier(0.1);
+							}),
+							new ConsequenceCard("Expectation vs Reality", "Surveys are all talk. Gain 5% less profits this turn.",()->{
+								Player.getInstance().addGainModifier(-0.05);
+							}),
 							new ConsequenceCard("Survey", "Your company has recieved numerous surveys and have implemented the best ideas with negative feedback. Lose $1000.",()->{
+								Player.getInstance().addMoney(-1000);
+							}),new ConsequenceCard("Wrong demographic", "Those chosen for the survey are not one who will use the product. Lose $1000.",()->{
 								Player.getInstance().addMoney(-1000);
 							}),
 							new ConsequenceCard("Web Surveys", "Your surveys have been taken on multiple websites that has been implemented with positive results. Gain $1000.",()->{
 								Player.getInstance().addMoney(1000);
+							}),
+							new ConsequenceCard("Hello fellow kids", "Your surveys reveal important features users want. Gain $500.",()->{
+								Player.getInstance().addMoney(500);
 							}),
 							new ConsequenceCard("Web Surveys", "While having surveys on multiple website it still requires funds. Lose $500.",()->{
 								Player.getInstance().addMoney(-500);
@@ -84,7 +107,7 @@ public class Game {
 					}),
 			new Choice("A penny saved is a penny earned", "Money not spent is money that is in one's pocket. Gain $5,000",
 					Arrays.asList(new ConsequenceCard[]{
-							new ConsequenceCard("Needed Upgrades", "You have been able to upgrad your equipment with no extra cost since with your savings. Your profits increase 5%.",()->{
+							new ConsequenceCard("Needed Upgrades", "You have been able to upgrade your equipment with no extra cost since with your savings. Your profits increase 5%.",()->{
 								Player.getInstance().addGainModifier(.05);
 							}),
 							new ConsequenceCard("Repair Cost", "Repairs are becoming more increasing and a financial burden as well. Lose $1,500",()->{
