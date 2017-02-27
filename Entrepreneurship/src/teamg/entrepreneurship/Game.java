@@ -79,7 +79,7 @@ public class Game {
 					}),()->{
 						
 					})
-	}));
+			}));
 		developmentPhase = new ChoicePhase("Business Plan", "In this phase you will choose what your business plan will be.",Arrays.asList(new Choice[]{
 			new Choice("The customer is always right", "In this phase you will decide on what business plan you will you choice and how it will affect your customers experience. You recieve an added bonus of $3,500.", 
 					Arrays.asList(new ConsequenceCard[]{
@@ -134,7 +134,7 @@ public class Game {
 						Player.getInstance().addMoney(5000);
 					})
 			
-	}));
+			}));
 		resourcingPhase = new ChoicePhase("Resourcing", "In this phase you will choose how to fund your business.",Arrays.asList(new Choice[]{
 			new Choice("Seek Investors", "You have found some investors. They give you $10000 with which to start your company.", 
 					Arrays.asList(new ConsequenceCard[]{
@@ -183,7 +183,7 @@ public class Game {
 					}),()->{
 						Player.getInstance().addMoney(5000);
 					})
-	}));
+			}));
 	
 		harvestingPhase = new ChoicePhase("Harvesting", "You have been developing your business for a while, and you're itching for a change.",Arrays.asList(new Choice[]{
 			new Choice("Grow your business", "You decide to develop a new product in order to grow your business.", Arrays.asList(new ConsequenceCard[]{
@@ -195,7 +195,7 @@ public class Game {
 					}),()->{
 						signalGameEnd();
 					}),
-	}));
+			}));
 		
 		beginPhase.setNextPhase(discoveryPhase);
 		discoveryPhase.setNextPhase(developmentPhase);
