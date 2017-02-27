@@ -5,7 +5,17 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 public class Game {
-	static Phase discoveryPhase = new ChoicePhase("Discovery", "In this phase you will determine your business's niche.",Arrays.asList(new Choice[]{
+	static Phase discoveryPhase;
+	static Phase developmentPhase;
+	static Phase resourcingPhase;
+	static Phase harvestingPhase;
+	static Phase beginPhase = new BeginPhase();
+	static Phase managementPhase = new ManagementPhase();
+	
+	static{
+		//Phase generation
+		//In the final game, we wouldn't hard-code these in Java; we would define them in external text files (YAML format probably)
+		discoveryPhase = new ChoicePhase("Discovery", "In this phase you will determine your business's niche.",Arrays.asList(new Choice[]{
 			new Choice("Seek Expert Advice", "Expert advice will help you avoid classic mistakes.",
 					Arrays.asList(new ConsequenceCard[]{
 							new ConsequenceCard("Nothing New", "Your product isn't new or exciting. Gain 10% less money than usual this turn.",()->{
@@ -70,7 +80,7 @@ public class Game {
 						
 					})
 	}));
-	static Phase developmentPhase = new ChoicePhase("Business Plan", "In this phase you will choose what your business plan will be.",Arrays.asList(new Choice[]{
+		developmentPhase = new ChoicePhase("Business Plan", "In this phase you will choose what your business plan will be.",Arrays.asList(new Choice[]{
 			new Choice("The customer is always right", "In this phase you will decide on what business plan you will you choice and how it will affect your customers experience. You recieve an added bonus of $3,500.", 
 					Arrays.asList(new ConsequenceCard[]{
 							new ConsequenceCard("Customer Satisfaction", "Overal customers are satisfied with your company since you pay attention to concerns and issues. Gain $500.",()->{
@@ -125,7 +135,7 @@ public class Game {
 					})
 			
 	}));
-	static Phase resourcingPhase = new ChoicePhase("Resourcing", "In this phase you will choose how to fund your business.",Arrays.asList(new Choice[]{
+		resourcingPhase = new ChoicePhase("Resourcing", "In this phase you will choose how to fund your business.",Arrays.asList(new Choice[]{
 			new Choice("Seek Investors", "You have found some investors. They give you $10000 with which to start your company.", 
 					Arrays.asList(new ConsequenceCard[]{
 							new ConsequenceCard("Bossy Investor", "An investor sabotages you because you didn't listen to his advice. Lose $200.",()->{
@@ -175,7 +185,7 @@ public class Game {
 					})
 	}));
 	
-	static Phase harvestingPhase = new ChoicePhase("Harvesting", "You have been developing your business for a while, and you're itching for a change.",Arrays.asList(new Choice[]{
+		harvestingPhase = new ChoicePhase("Harvesting", "You have been developing your business for a while, and you're itching for a change.",Arrays.asList(new Choice[]{
 			new Choice("Grow your business", "You decide to develop a new product in order to grow your business.", Arrays.asList(new ConsequenceCard[]{
 					}), ()->{
 						//nothing
@@ -186,10 +196,7 @@ public class Game {
 						signalGameEnd();
 					}),
 	}));
-	
-	static Phase beginPhase = new BeginPhase();
-	static Phase managementPhase = new ManagementPhase();
-	static{
+		
 		beginPhase.setNextPhase(discoveryPhase);
 		discoveryPhase.setNextPhase(developmentPhase);
 		developmentPhase.setNextPhase(resourcingPhase);		
@@ -198,8 +205,9 @@ public class Game {
 		harvestingPhase.setNextPhase(discoveryPhase);
 		//call random events
 		randEvents();
-		
 	}
+	
+
 	//Method for creating and adding random events to deck.
 	private static void randEvents(){
 		//variables
