@@ -113,8 +113,8 @@ public class Game {
 							new ConsequenceCard("Repair Cost", "Repairs are becoming more increasing and a financial burden as well. Lose $1,500",()->{
 								Player.getInstance().addMoney(-1500);
 							}),
-							new ConsequenceCard("Cheapskate", "Your business has took a toll on employee and customer satisfaction due to your need to hold out on anything requiring money. Lose 15%.",()->{
-								Player.getInstance().addLossModifier(-.15);
+							new ConsequenceCard("Cheapskate", "Your business has took a toll on employee and customer satisfaction due to your need to hold out on anything requiring money. \nLose 15% extra whenever you lose money this turn.",()->{
+								Player.getInstance().addLossModifier(.15);
 							}),
 							new ConsequenceCard("Market Crash", "The market crashes and all that cash you saved loses value. Lose 25% of all assets",()->{
 								double result = Player.getInstance().getMoney()*.75;
@@ -139,7 +139,7 @@ public class Game {
 							}),
 							new ConsequenceCard("Silent Ears", "Your idea is not unique enough and has given most investors doubts about giving you financial backings. Get a bank loan of $5,000 with -5%.",()->{
 								Player.getInstance().addMoney(-5000);
-								Player.getInstance().addLossModifier(-.05);
+								Player.getInstance().addLossModifier(.05);
 							})
 					}), ()->{
 						Player.getInstance().addMoney(10000);
@@ -150,17 +150,17 @@ public class Game {
 								Player.getInstance().addMoney(-200);
 							}),
 							new ConsequenceCard("Interest", "Lose an extra 10% whenever you lose money this turn.",()->{
-								Player.getInstance().addLossModifier(-0.1);
+								Player.getInstance().addLossModifier(0.1);
 							}),
-							new ConsequenceCard("Bad Credit", "Lose an extra 25%.",()->{
-								Player.getInstance().addLossModifier(-.25);
+							new ConsequenceCard("Bad Credit", "Lose an extra 25% whenever you lose money this turn..",()->{
+								Player.getInstance().addLossModifier(.25);
 							}),
-							new ConsequenceCard("Excellent Credit", "Secure an interest rate of 4% whenever you lose money this turn.",()->{
-								Player.getInstance().addGainModifier(0.04);
+							new ConsequenceCard("Excellent Credit", "Lose 4% less whenever you lose money this turn.",()->{
+								Player.getInstance().addLossModifier(-0.04);
 							})
 					}),()->{
 						Player.getInstance().addMoney(20000);
-						Player.getInstance().addLossModifier(-.07);				
+						Player.getInstance().addLossModifier(.07);				
 					}),
 			new Choice("Pay out of Pocket", "You fund your venture out of your own pocket. You only have $5000.",
 					Arrays.asList(new ConsequenceCard[]{
@@ -210,8 +210,8 @@ public class Game {
 		consequence.add(new ConsequenceCard("Car Payment", "You wind up having to take $500 from the company to pay a car payment.",()->effect.addMoney(500)));
 		consequence.add(new ConsequenceCard("Pay Day", "Its pay day, collect $1500.",()->effect.addMoney(1500)));
 		consequence.add(new ConsequenceCard("Broken Main", "Unfortunate events, pay $1,500 to repairs.",()->effect.addMoney(1500)));
-		consequence.add(new ConsequenceCard("Law Suits", "Dang, you just got a lawsuit. Pay $2,500 to settle.",()->effect.addMoney(-1500)));
-		consequence.add(new ConsequenceCard("Hire Employee", "Hiring a new employee isn't cheap. Lose $2,500",()->effect.addMoney(-1500)));
+		consequence.add(new ConsequenceCard("Law Suits", "Dang, you just got a lawsuit. Pay $2,500 to settle.",()->effect.addMoney(-2500)));
+		consequence.add(new ConsequenceCard("Hire Employee", "Hiring a new employee isn't cheap. Lose $2,500",()->effect.addMoney(-2500)));
 		consequence.add(new ConsequenceCard("Business as Usual", "Usual business of the day recieve a bonus payment of $500.",()->effect.addMoney(500)));
 		
 		//add to deck
